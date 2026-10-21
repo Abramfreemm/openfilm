@@ -720,6 +720,8 @@ export interface TimelineProps {
    * top corner that is dragged inward to set them (written through onEditOps).
    */
   fades?: ReadonlyMap<string, FadeMs>;
+  /** Project policy controls shown beside the editing tools. */
+  toolbarExtra?: React.ReactNode;
   /** The transitions the fades make (lib/transitions findTransitions): a mark over each, picked, resized, deleted. */
   transitions?: readonly FilmTransition[];
   /** A transition put on a cut (the cut's menu, a clip's menu), resized or deleted. Null = done. */
@@ -992,6 +994,7 @@ export const Timeline = React.memo(function Timeline({
   onResizeTrack,
   onReplaceDrop,
   fades,
+  toolbarExtra,
   transitions,
   onTransition,
   pickedTransition = null,
@@ -3915,6 +3918,7 @@ export const Timeline = React.memo(function Timeline({
           </ToolButton>
         ) : null}
 
+        {toolbarExtra}
         {/* the middle is for status: "Editing source…" and errors (not among the tools, where it would look like one) */}
         <div className="flex min-w-0 flex-1 items-center justify-center">
           {dropBusy || drag.saving ? (
